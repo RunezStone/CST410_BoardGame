@@ -41,6 +41,13 @@ public class TileManager : MonoBehaviour
                     spaces[i, j].GetComponent<Space>().neighboringIds[3, 0] = spaces[i, j - 1].GetComponent<Space>().id[0];
                     spaces[i, j].GetComponent<Space>().neighboringIds[3, 1] = spaces[i, j - 1].GetComponent<Space>().id[1];
                 }
+                /* 
+                 * Remove comment brackets only to verify neighboring IDs work.
+                Debug.Log(spaces[i, j].GetComponent<Space>().id[0] + ", " + spaces[i, j].GetComponent<Space>().id[1] + " - FRONT : " + spaces[i, j].GetComponent<Space>().neighboringIds[0, 0] + ", " + spaces[i, j].GetComponent<Space>().neighboringIds[0, 1]);
+                Debug.Log(spaces[i, j].GetComponent<Space>().id[0] + ", " + spaces[i, j].GetComponent<Space>().id[1] + " - LEFT : " + spaces[i, j].GetComponent<Space>().neighboringIds[1, 0] + ", " + spaces[i, j].GetComponent<Space>().neighboringIds[1, 1]);
+                Debug.Log(spaces[i, j].GetComponent<Space>().id[0] + ", " + spaces[i, j].GetComponent<Space>().id[1] + " - RIGHT : " + spaces[i, j].GetComponent<Space>().neighboringIds[2, 0] + ", " + spaces[i, j].GetComponent<Space>().neighboringIds[2, 1]);
+                Debug.Log(spaces[i, j].GetComponent<Space>().id[0] + ", " + spaces[i, j].GetComponent<Space>().id[1] + " - BACK : " + spaces[i, j].GetComponent<Space>().neighboringIds[3, 0] + ", " + spaces[i, j].GetComponent<Space>().neighboringIds[3, 1]);
+                */
             }
         }
     }

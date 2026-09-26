@@ -9,6 +9,6 @@ public class Space : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(neighboringIds);
+        
     }
 }
