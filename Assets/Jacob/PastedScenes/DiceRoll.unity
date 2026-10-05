@@ -926,7 +926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a1c59baf2ca48748439fda3f27dd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceScript
-  baseDice: {fileID: 517577300}
+  baseDice:
+  - {fileID: 517577300}
+  twoDice: 0
+  diceType: 0
   value1: 0
   value2: 0
   state: 0
