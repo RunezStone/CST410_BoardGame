@@ -20,7 +20,7 @@ public class NumberLink : MonoBehaviour
         float highestY = float.MinValue;
         int i;
         int value = 0;
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < diceFaces.Length; i++)
         {
             if (diceFaces[i].transform.position.y > highestY || highestY == float.MinValue)
             {
