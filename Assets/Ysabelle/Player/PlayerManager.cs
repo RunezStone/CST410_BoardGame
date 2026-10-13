@@ -10,6 +10,9 @@ public class PlayerManager : MonoBehaviour
     [Header("CurrentSpace")]
     public Space currSpace;
 
+    [Header("User Interface")]
+    public Canvas playerUICanvas;
+
     [Header("Player Reference Scripts")]
     public PlayerData playerData;
     [SerializeField] CardInventory inventory;
@@ -120,5 +123,15 @@ public class PlayerManager : MonoBehaviour
         }
         validMovementSpaces.Clear();
         validTargetSpaces.Clear();
+    }
+
+    public void DisplayPlayerUI()
+    {
+        playerUICanvas.gameObject.SetActive(true);
+    }
+
+    public void HidePlayerUI()
+    {
+        playerUICanvas.gameObject.SetActive(false);
     }
 }
