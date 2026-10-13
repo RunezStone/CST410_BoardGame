@@ -12,10 +12,6 @@ public class Space : MonoBehaviour
     private bool isBlocked = false;
     private GameObject currentCharacter = null;
 
-    private void Start()
-    {
-
-    }
 
     public bool CharacterExistsInSpace()
     {
