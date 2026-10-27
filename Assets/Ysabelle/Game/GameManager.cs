@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +10,8 @@ public class GameManager : MonoBehaviour
     [Header("Players")]
     public List<PlayerManager> players = new List<PlayerManager>();
 
+    private PlayerManager currentPlayer;
+
     void Start()
     {
         TileManager.instance.InitializeBoard();
@@ -21,31 +22,40 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        while(!SomeoneDead())
+        while (!SomeoneDead())
         {
             foreach (var player in players)
-            { 
-                SwitchPlayerUI(player);
-                Type type = player.GetType();
-                gameUIManager.ChangePlayerTurnDisplay(type.Name);
+            {
+                currentPlayer = player;
 
+                player.DisplayPlayerUI();
+                gameUIManager.ChangePlayerTurnDisplay(player.gameObject.name);
+
+                // Waits here until this player presses End Turn
                 yield return StartCoroutine(player.PlayerTurn());
+
                 player.HidePlayerUI();
+
+                if (SomeoneDead()) break;
             }
         }
-        yield return null;
+
+        currentPlayer = null;
+        Debug.Log("Game over");   // replace with your game-over screen
     }
 
-    private void SwitchPlayerUI(PlayerManager player)
+    // Hook a shared End Turn button's OnClick to this
+    public void OnEndTurnPressed()
     {
-        player.DisplayPlayerUI();
+        if (currentPlayer != null)
+            currentPlayer.EndTurn();
     }
 
     bool SomeoneDead()
     {
         foreach (var player in players)
         {
-            if (player.playerData.hitPoints <= 0) { return true; }
+            if (player.playerData.hitPoints <= 0) return true;
         }
         return false;
     }
