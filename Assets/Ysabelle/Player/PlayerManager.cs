@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] bool isTurn = false;
+    [SerializeField] bool hasMoved = false;      // NEW: one move per turn
+    [SerializeField] bool turnEnded = false;     // NEW: set only by End Turn button
     [SerializeField] bool isInTargetingMode = false;
 
     [Header("CurrentSpace")]
@@ -41,7 +43,7 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        else if (isTurn && Input.GetMouseButtonDown(0))
+        else if (isTurn && !hasMoved && Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -60,17 +62,21 @@ public class PlayerManager : MonoBehaviour
 
     public void PlaceCharacter(Space space)
     {
-        // Remove from old space
         if (currSpace != null)
-        {
             currSpace.RemoveObject();
-        }
 
-        // Place on new space
         currSpace = space;
         currSpace.PlaceObject(gameObject);
 
-        isTurn = false;
+        hasMoved = true;          // was: isTurn = false;
+        ClearHighlighting();      // remove the green tiles once they've moved
+    }
+
+    public void EndTurn()
+    {
+        if (!isTurn) return;      // ignore clicks when it's not this player's turn
+        if (isInTargetingMode) ExitTargetingMode();
+        turnEnded = true;
     }
 
     public void EnterTargetingMode(List<Space> targetSpaces, System.Action<Space, PlayerManager> callback, PlayerManager playerManager)
@@ -91,16 +97,20 @@ public class PlayerManager : MonoBehaviour
     public IEnumerator PlayerTurn()
     {
         isTurn = true;
+        hasMoved = false;
+        turnEnded = false;
 
-       
+        DisplayPlayerUI();
+
         validMovementSpaces = TileManager.instance.GetValidMovementSpaces(currSpace, playerData.movement);
-
-        
         HighlightValidSpaces(validMovementSpaces, Color.green);
 
-        yield return new WaitUntil(() => !isTurn); 
+        // Player can move and play cards freely until they press End Turn
+        yield return new WaitUntil(() => turnEnded);
 
+        isTurn = false;
         ClearHighlighting();
+        HidePlayerUI();
     }
 
     void HighlightValidSpaces(List<Space> spaces, Color color)

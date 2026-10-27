@@ -10,6 +10,9 @@ public class TileManager : MonoBehaviour
 
     [SerializeField] float spacing = 1.025f;
 
+    [Header("Materials")]
+    [SerializeField] Material grassMaterial;
+
     private void Awake()
     {
         instance = this;
@@ -22,6 +25,10 @@ public class TileManager : MonoBehaviour
             for (int j = 0; j < 15; j++)
             {
                 spaces[i, j] = Object.Instantiate(baseSpace);
+
+                // turns all to grass material CHANGE LATER
+                spaces[i,j].GetComponent<Renderer>().sharedMaterial = grassMaterial;
+
                 spaces[i, j].GetComponent<Space>().id[0] = i;
                 spaces[i, j].GetComponent<Space>().id[1] = j;
                 spaces[i, j].transform.position = new UnityEngine.Vector3((i - (float)4.5) * spacing, 0, (j - 7) * spacing);

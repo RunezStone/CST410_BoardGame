@@ -7,6 +7,7 @@ public class PlayerData : MonoBehaviour
     public int hitPoints = 20;
     public int actionPoints = 1;
     public int attackBonus = 2;
+    public int magicBonus = 0;
     public int movement = 5;
 
     [Header("Player Base Checks")]
