@@ -35,13 +35,23 @@ public class CardUIManager : MonoBehaviour
     {
         for (int i = 0; i < cardDisplays.Count; i++)
         {
-            int cardIndex = currentCardIndex + i;
-
-            if (cardIndex < currentCards.Count)
+            if (cardDisplays[i] == null)
             {
-                ActionCard card = currentCards[cardIndex];
-                cardDisplays[i].ChangeDisplay(card.cardName, card.cardDescription, card.points);
+                Debug.LogError($"{name}: Card Displays slot {i} is empty in the Inspector.", this);
+                continue;
             }
+
+            int cardIndex = currentCardIndex + i;
+            if (cardIndex >= currentCards.Count) continue;
+
+            ActionCard card = currentCards[cardIndex];
+            if (card == null)
+            {
+                Debug.LogError($"{name}: Card {cardIndex} in {playerInventory.name}'s inventory is missing.", playerInventory);
+                continue;
+            }
+
+            cardDisplays[i].ChangeDisplay(card.cardName, card.cardDescription, card.points);
         }
     }
 
@@ -52,7 +62,7 @@ public class CardUIManager : MonoBehaviour
         if (cardIndex < currentCards.Count)
         {
             ActionCard card = currentCards[cardIndex];
-            card.InitiateAction(playerManager);
+            card.Play(playerManager);
         }
     }
 

@@ -1,30 +1,26 @@
 using UnityEngine;
 
+// Bow Shot (0 AP): ranged attack up to 5 squares away for 4 damage.
+// Fires up, down, left and right only (a + from the fighter).
+// The first character in a line can be shot, but blocks everything behind them.
 public class BowShotCard : ActionCard
 {
-    [SerializeField] private int damage = 4;
     [SerializeField] private int range = 5;
+    [SerializeField] private int flatDamage = 4;
+    [SerializeField] private int damageDieSides = 0;
 
-    public override void InitiateAction(PlayerManager playerManager)
+    public override void InitiateAction(PlayerManager player)
     {
-        // Show all spaces within 5 squares
-        var validSpaces = TileManager.instance.GetValidMovementSpaces(playerManager.currSpace, range);
-        playerManager.EnterTargetingMode(validSpaces, ExecuteShot, playerManager);
+        var spaces = GetSpacesInLines(player.currSpace, range, StraightDirections);
+        player.EnterTargetingMode(spaces, OnTargetChosen, player);
     }
 
-    private void ExecuteShot(Space targetSpace, PlayerManager playerManager)
+    private void OnTargetChosen(Space space, PlayerManager attacker)
     {
-        // Check for enemies at target
-        Collider[] colliders = Physics.OverlapSphere(targetSpace.transform.position, 0.5f);
+        PlayerManager target = FindCharacterOn(space, attacker);
+        if (target == null) { Debug.Log("Nobody there to shoot."); return; }
+        if (!TrySpend(attacker)) return;
 
-        foreach (Collider col in colliders)
-        {
-            PlayerManager enemy = col.GetComponent<PlayerManager>();
-            if (enemy != null && enemy != playerManager)
-            {
-                enemy.playerData.hitPoints -= damage;
-                Debug.Log($"{playerManager.gameObject.name} shot {enemy.gameObject.name} for {damage} damage!");
-            }
-        }
+        ResolveAttack(attacker, target, flatDamage, damageDieSides);
     }
 }
