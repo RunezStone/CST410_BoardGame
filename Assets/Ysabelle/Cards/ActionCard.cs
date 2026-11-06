@@ -134,7 +134,7 @@ public abstract class ActionCard : MonoBehaviour
             return;   // onTotal runs when the dice land
 
         int sum = 0;
-        for (int i = 0; i < count; i++) sum += Random.Range(1, sides + 1);
+        sum = Convergence.Rules.DiceService.Main.Roll(count, sides);   // one seeded service for all randomness
         onTotal(sum);
     }
 

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecondWindCard
   cardName: Second Wind
-  cardDescription: Heal 5 points
+  cardDescription: Heal yourself 1d12 HP.
   points: 1
   healAmount: 10
