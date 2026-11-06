@@ -126,8 +126,9 @@ public class DiceScript : MonoBehaviour
             die.transform.Rotate(new Vector3(225, 0, 225));
 
             Rigidbody rb = die.GetComponent<Rigidbody>();
-            rb.AddForce(new Vector3(Random.Range(-50, 50), Random.Range(-20, 0), Random.Range(-50, 50)), ForceMode.Impulse);
-            rb.AddTorque(new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50)), ForceMode.Impulse);
+            var dice = Convergence.Rules.DiceService.Main;   // throw forces come from the one seeded service
+            rb.AddForce(new Vector3(dice.Range(-50, 50), dice.Range(-20, 0), dice.Range(-50, 50)), ForceMode.Impulse);
+            rb.AddTorque(new Vector3(dice.Range(-50, 50), dice.Range(-50, 50), dice.Range(-50, 50)), ForceMode.Impulse);
 
             activeDice.Add(die);
         }

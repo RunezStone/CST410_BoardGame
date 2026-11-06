@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowShotCard
   cardName: Bow Shot
-  cardDescription: Player shoots for 4 points of damage shoot towards any adjacent area
+  cardDescription: Straight line, range 5; stops at the first character. 1d4 damage.
   points: 0
   damage: 4
-  range: 15
+  range: 5

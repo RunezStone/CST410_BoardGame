@@ -2843,10 +2843,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowShotCard
   cardName: Bow Shot
-  cardDescription: Player shoots for 4 points of damage shoot towards any adjacent area
+  cardDescription: Straight line, range 5; stops at the first character. 1d4 damage.
   points: 0
   damage: 4
-  range: 15
+  range: 5
 --- !u!4 &429553909
 Transform:
   m_ObjectHideFlags: 0
@@ -7026,7 +7026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GreatSwordAttack
   cardName: Great Sword Attack
-  cardDescription: Player swings their sword for 5 damage
+  cardDescription: Attack one adjacent character for 2d4 damage.
   points: 0
   damage: 5
 --- !u!4 &1014450288
@@ -8021,7 +8021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecondWindCard
   cardName: Second Wind
-  cardDescription: Heal 5 points
+  cardDescription: Heal yourself 1d12 HP.
   points: 1
   healAmount: 10
 --- !u!4 &1107029548

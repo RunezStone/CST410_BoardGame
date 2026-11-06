@@ -1,12 +1,13 @@
 using UnityEngine;
 
-// Great Sword Attack (0 AP): melee attack on an adjacent square.
+// Great Sword Attack (0 AP): melee attack on an adjacent square for 2d4.
+// 2d4 is the dice lab's Block B decision (one-shots a 6 HP minion on 6 of 16, 37.5%).
 public class GreatSwordAttack : ActionCard
 {
-    [Header("Attack")]
-    [Tooltip("GDD says flat 5. Set Flat 5 / Die 0 for that, or Flat 0 / Die 4 for 1d4.")]
+    [Header("Attack (Dice Lab Block B: 2d4)")]
     [SerializeField] private int flatDamage = 0;
     [SerializeField] private int damageDieSides = 4;
+    [SerializeField] private int damageDiceCount = 2;
     [SerializeField] private bool includeDiagonals = true;
 
     public override void InitiateAction(PlayerManager player)
@@ -20,6 +21,6 @@ public class GreatSwordAttack : ActionCard
         if (target == null) { Debug.Log("Nobody there to hit."); return; }   // free: no cost spent
         if (!TrySpend(attacker)) return;
 
-        ResolveAttack(attacker, target, flatDamage, damageDieSides);
+        ResolveAttack(attacker, target, flatDamage, damageDieSides, damageDiceCount);
     }
 }

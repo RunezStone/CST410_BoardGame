@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GreatSwordAttack
   cardName: Great Sword Attack
-  cardDescription: Player swings their sword for 5 damage
+  cardDescription: Attack one adjacent character for 2d4 damage.
   points: 0
   damage: 5

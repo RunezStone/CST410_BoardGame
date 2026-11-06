@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9761e749c2fde2640a4e2ec3b0c2143e, type: 3}
+  m_Name: DiceLab
+  m_EditorClassIdentifier: Assembly-CSharp::Convergence.Rules.DiceLabConfig
+  seed: 410
+  attackDie: 20
+  natural20AlwaysHits: 1
+  natural1AlwaysMisses: 1
+  echoBonus: 1
+  minionDefense: 9
+  minionHitPoints: 6
+  minionAttackBonus: 1
+  minionConstitution: 0
+  minionMove: 4
+  minionBite:
+    count: 1
+    sides: 6
+    flat: 0
+  basicMeleeDamage:
+    count: 2
+    sides: 4
+    flat: 0
+  healDice:
+    count: 2
+    sides: 6
+    flat: 0
+  healReferenceTarget: 7
+  stunSaveDC: 12
+  openingDraw: 2
+  handLimit: 5
+  histogramRolls: 200
+  chiSquareCritical: 18.31
