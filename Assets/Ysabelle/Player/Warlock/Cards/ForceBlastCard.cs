@@ -3,11 +3,11 @@ using UnityEngine;
 public class ForceBlastCard : ActionCard
 {
 
-    [SerializeField] private int range = 3;
+    [SerializeField] private int range = 4;
     [SerializeField] private int flatDamage = 0;
     [SerializeField] private int damageDieSides = 4;
     [SerializeField] private int damageDiceCount = 4;
-    [SerializeField] private int pushSquares = 2;
+    [SerializeField] private int pushSquares = 7;
 
     void Reset() { points = 1; }   // default cost when the script is first added
 

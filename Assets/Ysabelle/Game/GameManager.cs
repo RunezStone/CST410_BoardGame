@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         players[1].PlaceCharacter(tileManager.spaces[5, 5].GetComponent<Space>());
         players[2].PlaceCharacter(tileManager.spaces[1, 0].GetComponent<Space>());
         players[3].PlaceCharacter(tileManager.spaces[3, 0].GetComponent<Space>());
+        players[4].PlaceCharacter(tileManager.spaces[6, 0].GetComponent<Space>());
 
         // 2. Tell physics about the new tiles right away, so mouse raycasts can hit them
         Physics.SyncTransforms();
@@ -59,6 +60,19 @@ public class GameManager : MonoBehaviour
                 yield return StartCoroutine(player.PlayerTurn());
 
                 if (SomeoneDead()) break;
+
+                // Minions act as part of the Villain's turn, right after the Villain ends it.
+                // They aren't in `players`, so a minion dying never ends the game.
+                if (player.team == Team.VILLAIN && !player.isMinion && MinionManager.instance != null)
+                {
+                    yield return StartCoroutine(MinionManager.instance.RunMinionTurns(minion =>
+                    {
+                        currentPlayer = minion;   // so the shared End Turn button ends the minion's turn
+                        gameUIManager.ChangePlayerTurnDisplay(minion.gameObject.name);
+                    }, SomeoneDead));
+
+                    if (SomeoneDead()) break;
+                }
             }
         }
 

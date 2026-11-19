@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3650577646908473394
+--- !u!1 &2328784531709618898
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6361605959779736573}
-  - component: {fileID: 3482864169033592618}
+  - component: {fileID: 730835395652350900}
+  - component: {fileID: 4564311257880294058}
   m_Layer: 0
   m_Name: TacticalShiftCard
   m_TagString: Untagged
@@ -17,34 +17,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6361605959779736573
+--- !u!4 &730835395652350900
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650577646908473394}
+  m_GameObject: {fileID: 2328784531709618898}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458.37048, y: 0.00001, z: 622.8934}
+  m_LocalPosition: {x: 3.08305, y: 2.25182, z: -9.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3482864169033592618
+--- !u!114 &4564311257880294058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650577646908473394}
+  m_GameObject: {fileID: 2328784531709618898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4bc5a3025c282f49a3e59f8fcb4f84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TacticalShiftCard
   cardName: Tactical Shift
-  cardDescription: Teleport 5 squares away
+  cardDescription: Teleport to an empty square within range 5. You keep your normal move.
   points: 1
+  costsAction: 1
   teleportRange: 5
+  includeDiagonals: 0

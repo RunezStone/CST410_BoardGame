@@ -1,23 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Lightning Strike (1 spell point): hit a character for 2d6. If it hits, the lightning
-// arcs to everyone adjacent to the target (friendly fire included) in a chain reaction.
-// Chain targets don't get an attack roll -- the arc always lands.
+// Lightning Strike (1 spell point): hit a character within 6 for 2d12. On a FULL hit, the lightning
+// arcs to everyone adjacent to the target except the caster (friendly fire included).
+// Arc targets take half the damage, rounded up, with no attack roll.
 public class LightningStrikeCard : ActionCard
 {
-    [Tooltip("GDD doesn't give a range. 6 is a placeholder -- change it once the team decides.")]
+    [Tooltip("Orthogonal range (Cards.xlsx: 6).")]
     [SerializeField] private int range = 6;
     [SerializeField] private bool includeDiagonals = false;
     [SerializeField] private int flatDamage = 0;
-    [SerializeField] private int damageDieSides = 6;
+    [SerializeField] private int damageDieSides = 12;
     [SerializeField] private int damageDiceCount = 2;
 
     [Header("Chain")]
     [Tooltip("1 = only people next to the main target. 2+ = it keeps jumping to people next to THEM, and so on.")]
     [SerializeField] private int chainJumps = 1;
-    [Tooltip("Chain damage as a % of the main hit. 100 = same damage.")]
-    [Range(0, 100)][SerializeField] private int chainDamagePercent = 100;
+    [Tooltip("Arc damage as a % of the main hit, rounded UP. Cards.xlsx: 50.")]
+    [Range(0, 100)][SerializeField] private int chainDamagePercent = 50;
     [Tooltip("Does 'adjacent' include diagonal squares?")]
     [SerializeField] private bool chainIncludesDiagonals = true;
     [Tooltip("Can the arc hit the wizard who cast it?")]
@@ -43,7 +43,7 @@ public class LightningStrikeCard : ActionCard
 
         ResolveAreaAttack(attacker, new List<PlayerManager> { target }, flatDamage, damageDieSides, damageDiceCount,
             onHit: (mainTarget, damage) =>
-                Chain(attacker, mainTarget, damage * percent / 100, jumps, diag, hitCaster));
+                Chain(attacker, mainTarget, Mathf.CeilToInt(damage * percent / 100f), jumps, diag, hitCaster));
     }
 
     // Spreads outward from the main target one "ring" of neighbours at a time.

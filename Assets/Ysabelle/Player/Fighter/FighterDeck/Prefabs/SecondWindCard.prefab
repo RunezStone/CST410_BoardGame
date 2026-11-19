@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1740319972346441818
+--- !u!1 &8752931234273453660
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 373185756422717394}
-  - component: {fileID: 8077732887436433914}
+  - component: {fileID: 8113959890569499943}
+  - component: {fileID: 6605009714497470712}
   m_Layer: 0
   m_Name: SecondWindCard
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &373185756422717394
+--- !u!4 &8113959890569499943
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740319972346441818}
+  m_GameObject: {fileID: 8752931234273453660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458.37048, y: 0.00001, z: 622.8934}
+  m_LocalPosition: {x: 3.08305, y: 2.25182, z: -9.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8077732887436433914
+--- !u!114 &6605009714497470712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740319972346441818}
+  m_GameObject: {fileID: 8752931234273453660}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41639d4d8160c0f44b7e1c3941e4ef26, type: 3}
@@ -47,4 +47,7 @@ MonoBehaviour:
   cardName: Second Wind
   cardDescription: Heal yourself 1d12 HP.
   points: 1
-  healAmount: 10
+  costsAction: 1
+  flatHeal: 0
+  healDieSides: 12
+  healDiceCount: 1

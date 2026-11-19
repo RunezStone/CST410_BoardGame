@@ -1,21 +1,26 @@
 using UnityEngine;
 
+// Tactical Shift (1 pt): teleport to an empty square within range 5. You keep your normal move.
 public class TacticalShiftCard : ActionCard
 {
+    [Tooltip("Orthogonal range (Cards.xlsx: 5).")]
     [SerializeField] private int teleportRange = 5;
+    [SerializeField] private bool includeDiagonals = false;
 
-    public override void InitiateAction(PlayerManager playerManager)
+    void Reset() { points = 1; }
+
+    public override void InitiateAction(PlayerManager player)
     {
-        var validSpaces = TileManager.instance.GetValidMovementSpaces(playerManager.currSpace, teleportRange);
-        playerManager.EnterTargetingMode(validSpaces, ExecuteTeleport, playerManager);
+        if (player.IsFrozen) { Debug.Log($"{player.name} is frozen and can't teleport."); return; }
+        var spaces = GetSpacesInRange(player.currSpace, teleportRange, includeDiagonals, emptyOnly: true);
+        player.EnterTargetingMode(spaces, OnTargetChosen, player);
     }
 
-    private void ExecuteTeleport(Space targetSpace, PlayerManager playerManager)
+    private void OnTargetChosen(Space space, PlayerManager player)
     {
-        playerManager.PlaceCharacter(targetSpace);
-        Debug.Log($"{playerManager.gameObject.name} teleported!");
-
-
-        playerManager.playerData.actionPoints -= 1;
+        if (player.IsFrozen) return;
+        if (!TrySpend(player)) return;
+        player.Teleport(space);   // Teleport, not PlaceCharacter: the normal move is kept
+        Debug.Log($"{player.name} shifts to [{space.id[0]}, {space.id[1]}].");
     }
 }

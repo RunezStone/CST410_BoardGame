@@ -37,6 +37,7 @@ public class SwapCard : ActionCard
     {
         PlayerManager ally = FindCharacterOn(space, player);
         if (!player.IsAllyOf(ally)) { Debug.Log("Swap only works with teammates."); return; }
+        if (player.IsFrozen || ally.IsFrozen) { Debug.Log("A frozen character can't be swapped."); return; }   // free
         if (!TrySpend(player)) return;
 
         player.SwapPlaces(ally);

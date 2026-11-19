@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2914413341467163155
+--- !u!1 &3692070114216378154
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8340081879443374744}
-  - component: {fileID: 2680780569376764590}
+  - component: {fileID: 174604872770406711}
+  - component: {fileID: 4364251121646964050}
   m_Layer: 0
   m_Name: BowShotCard
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8340081879443374744
+--- !u!4 &174604872770406711
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2914413341467163155}
+  m_GameObject: {fileID: 3692070114216378154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458.37048, y: 0.00001, z: 622.8934}
+  m_LocalPosition: {x: 3.08305, y: 2.25182, z: -9.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2680780569376764590
+--- !u!114 &4364251121646964050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2914413341467163155}
+  m_GameObject: {fileID: 3692070114216378154}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 973a38fa4229663478dc8066ec2c81d0, type: 3}
@@ -47,5 +47,7 @@ MonoBehaviour:
   cardName: Bow Shot
   cardDescription: Straight line, range 5; stops at the first character. 1d4 damage.
   points: 0
-  damage: 4
+  costsAction: 1
   range: 5
+  flatDamage: 0
+  damageDieSides: 4

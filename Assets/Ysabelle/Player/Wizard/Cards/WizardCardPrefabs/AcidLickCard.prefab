@@ -48,8 +48,8 @@ MonoBehaviour:
   cardDescription: The wizard licks an enemy for 1d6 damage within 2 squares
   points: 0
   costsAction: 1
-  range: 2
+  range: 4
   includeDiagonals: 0
   flatDamage: 0
   damageDieSides: 6
-  damageDiceCount: 1
+  damageDiceCount: 2

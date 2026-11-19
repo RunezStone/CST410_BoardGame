@@ -51,9 +51,9 @@ MonoBehaviour:
   range: 6
   includeDiagonals: 0
   flatDamage: 0
-  damageDieSides: 6
+  damageDieSides: 12
   damageDiceCount: 2
   chainJumps: 1
-  chainDamagePercent: 100
+  chainDamagePercent: 50
   chainIncludesDiagonals: 1
   chainCanHitCaster: 0

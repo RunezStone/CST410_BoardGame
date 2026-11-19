@@ -1,15 +1,15 @@
 using UnityEngine;
 
-// Acid Lick (0 spell points): lick a character within 2 squares for 1d6.
+// Acid Lick (0 spell points): lick a character within 4 squares for 2d6.
 // Shorter range than Spitfire but a bigger die.
 public class AcidLickCard : ActionCard
 {
-    [SerializeField] private int range = 2;
+    [SerializeField] private int range = 4;
     [Tooltip("false = count squares like movement (up/down/left/right). true = a diagonal step counts as 1.")]
     [SerializeField] private bool includeDiagonals = false;
     [SerializeField] private int flatDamage = 0;
     [SerializeField] private int damageDieSides = 6;
-    [SerializeField] private int damageDiceCount = 1;
+    [SerializeField] private int damageDiceCount = 2;
 
     public override void InitiateAction(PlayerManager player)
     {

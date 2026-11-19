@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Set this per character in the Inspector (Wizard, Fighter, Monk, Cleric = HERO; Warlock = VILLAIN)")]
     public Team team;
 
+    [Tooltip("Set by MinionManager when it spawns a minion. Minions take their turns right after the Villain's.")]
+    public bool isMinion = false;
+
     [SerializeField] bool isTurn = false;
     [SerializeField] bool hasMoved = false;          // one move per turn
     [SerializeField] bool turnEnded = false;         // set only by End Turn
@@ -47,6 +50,10 @@ public class PlayerManager : MonoBehaviour
 
     public bool IsTurn => isTurn;
     public int ActionsLeft => actionsLeft;
+    public int ActionsPerTurn => actionsPerTurn;
+
+    // Judgement: can't walk or teleport itself while this is on (pushes still move it).
+    public bool IsFrozen => GetComponent<FrozenEffect>() != null;
 
     // True if `other` is on the same team (false for null). Attacks ignore this on purpose --
     // friendly fire is part of the game. Use it for support cards (Surge, Heal, Haste, Swap).
@@ -106,11 +113,19 @@ public class PlayerManager : MonoBehaviour
         ClearMovementSpaces();   // only clears movement; targeting is untouched
     }
 
-    // Card-driven move (Tactical Shift, Misty Step, Swap): does NOT use up the normal move.
-    public void Teleport(Space space)
+    // Card-driven move (Tactical Shift, Misty Step, Shadow Veil): does NOT use up the normal move.
+    // Frozen characters can't reposition themselves; forced = true is for pushes, which still work.
+    // Returns false if the move was refused.
+    public bool Teleport(Space space, bool forced = false)
     {
+        if (!forced && IsFrozen)
+        {
+            Debug.Log($"{name} is frozen and can't reposition.");
+            return false;
+        }
         MoveTo(space);
         RefreshMovementSpaces();   // green tiles follow the new position
+        return true;
     }
 
     // Swap: both characters trade squares. Neither uses up their normal move.
@@ -118,6 +133,11 @@ public class PlayerManager : MonoBehaviour
     public void SwapPlaces(PlayerManager other)
     {
         if (other == null || other == this) return;
+        if (IsFrozen || other.IsFrozen)
+        {
+            Debug.Log("A frozen character can't be swapped.");
+            return;
+        }
 
         Space mine = currSpace, theirs = other.currSpace;
         mine.RemoveObject();
@@ -153,11 +173,17 @@ public class PlayerManager : MonoBehaviour
         if (!isTurn || hasMoved) return;
 
         Paint(validMovementSpaces, normalColor);
-        validMovementSpaces = new List<Space>(
-            TileManager.instance.GetValidMovementSpaces(currSpace, playerData.movement));
+        validMovementSpaces = ComputeMovementSpaces();
 
         if (isInTargetingMode) Paint(validTargetSpaces, targetColor);   // aiming: keep only red showing
         else Paint(validMovementSpaces, moveColor);
+    }
+
+    // Where this character can walk this turn. Empty while Frozen.
+    List<Space> ComputeMovementSpaces()
+    {
+        if (IsFrozen) return new List<Space>();
+        return new List<Space>(TileManager.instance.GetValidMovementSpaces(currSpace, playerData.movement));
     }
 
     public void UseAction()
@@ -169,6 +195,14 @@ public class PlayerManager : MonoBehaviour
     public void GrantAction(int amount = 1)
     {
         actionsLeft += amount;
+    }
+
+    // Timed effects (Haste) that change how many actions this character gets each turn.
+    // If it's their turn right now, the change applies to this turn too.
+    public void ModifyActionsPerTurn(int amount)
+    {
+        actionsPerTurn = Mathf.Max(0, actionsPerTurn + amount);
+        if (isTurn) actionsLeft = Mathf.Max(0, actionsLeft + amount);
     }
 
     public void EndTurn()
@@ -233,8 +267,8 @@ public class PlayerManager : MonoBehaviour
 
         DisplayPlayerUI();
 
-        validMovementSpaces = new List<Space>(
-            TileManager.instance.GetValidMovementSpaces(currSpace, playerData.movement));
+        if (IsFrozen) Debug.Log($"{name} is frozen and can't move this turn.");
+        validMovementSpaces = ComputeMovementSpaces();
         Paint(validMovementSpaces, moveColor);
 
         // Player can move and play cards freely until they press End Turn
@@ -273,13 +307,21 @@ public class PlayerManager : MonoBehaviour
 
     // ---------------- UI ----------------
 
+    // Null-safe: minions may not have a canvas (they can use MinionManager's keyboard fallback).
     public void DisplayPlayerUI()
     {
-        playerUICanvas.gameObject.SetActive(true);
+        if (playerUICanvas != null) playerUICanvas.gameObject.SetActive(true);
     }
 
     public void HidePlayerUI()
     {
+        // Close any open card panel too (the player's own, or the shared minion canvas's),
+        // so it doesn't stay on screen into the next character's turn.
+        CardUIManager cards = GetComponent<CardUIManager>();
+        if (cards != null) cards.HideCardPanel();
+        if (playerUICanvas == null) return;
+        CardUIManager canvasCards = playerUICanvas.GetComponent<CardUIManager>();
+        if (canvasCards != null) canvasCards.HideCardPanel();
         playerUICanvas.gameObject.SetActive(false);
     }
 }

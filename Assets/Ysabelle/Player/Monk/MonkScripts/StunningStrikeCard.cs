@@ -6,8 +6,8 @@ using UnityEngine;
 // No attack roll and no damage (the GDD only describes the stun).
 public class StunningStrikeCard : ActionCard
 {
-    [Tooltip("Number the target must reach on d20 + constitution to resist. GDD doesn't give one; 12 is a placeholder.")]
-    [SerializeField] private int checkDC = 12;
+    [Tooltip("Target rolls d20 + Constitution; below this number they are stunned (Cards.xlsx: Con < 15).")]
+    [SerializeField] private int checkDC = 15;
     [SerializeField] private bool includeDiagonals = true;
 
     void Reset() { points = 1; }

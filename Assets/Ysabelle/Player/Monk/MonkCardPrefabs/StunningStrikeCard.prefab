@@ -48,5 +48,5 @@ MonoBehaviour:
   cardDescription: "the target makes a constitution check; if it fails, it is stunned until the Monk\u2019s next turn."
   points: 1
   costsAction: 1
-  checkDC: 12
+  checkDC: 15
   includeDiagonals: 1

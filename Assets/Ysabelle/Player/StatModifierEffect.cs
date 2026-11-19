@@ -1,9 +1,9 @@
 using UnityEngine;
 
-// A reusable timed buff/debuff: +damage, +movement and/or +defense for a number of the
+// A reusable timed buff/debuff: +damage, +movement, +defense and/or +actions per turn for a number of the
 // owner's turns, removed automatically when it runs out.
-// Used by Surge and Defensive Stance. Also fits Haste (+2 movement, 3 turns):
-//     StatModifierEffect.Apply(target, "Haste", 3, movement: 2);
+// Used by Surge, Defensive Stance, Beacon of Hope and Haste, e.g.
+//     StatModifierEffect.Apply(target, "Haste", 3, movement: 2, actions: 1);
 // (ITurnEffect lives in RageEffect.cs.)
 public class StatModifierEffect : MonoBehaviour, ITurnEffect
 {
@@ -12,7 +12,7 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
     [SerializeField] bool countsDownAtTurnStart;
 
     PlayerManager player;
-    int damage, movement, defense;
+    int damage, movement, defense, actions;
 
     // Adds the effect, or refreshes its duration if the target already has one with this name.
     //
@@ -24,7 +24,7 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
     //      Good for defense, which matters during everyone ELSE's turns:
     //      3 = protected through 3 full rounds of other players' turns.
     public static StatModifierEffect Apply(PlayerManager target, string name, int turns,
-                                           int damage = 0, int movement = 0, int defense = 0,
+                                           int damage = 0, int movement = 0, int defense = 0, int actions = 0,
                                            bool countsDownAtTurnStart = false)
     {
         foreach (StatModifierEffect existing in target.GetComponents<StatModifierEffect>())
@@ -39,7 +39,7 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
 
         StatModifierEffect effect = target.gameObject.AddComponent<StatModifierEffect>();
         effect.countsDownAtTurnStart = countsDownAtTurnStart;
-        effect.Begin(target, name, turns, damage, movement, defense);
+        effect.Begin(target, name, turns, damage, movement, defense, actions);
         return effect;
     }
 
@@ -50,7 +50,7 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
         return false;
     }
 
-    void Begin(PlayerManager p, string name, int turns, int dmg, int move, int def)
+    void Begin(PlayerManager p, string name, int turns, int dmg, int move, int def, int acts)
     {
         player = p;
         effectName = name;
@@ -58,10 +58,12 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
         damage = dmg;
         movement = move;
         defense = def;
+        actions = acts;
 
         player.playerData.damageBonus += damage;
         player.playerData.movement += movement;
         player.playerData.defense += defense;
+        if (actions != 0) player.ModifyActionsPerTurn(actions);   // counts this turn too if it is theirs
         if (movement != 0) player.RefreshMovementSpaces();   // only does anything during their turn
 
         Debug.Log($"{player.name} gains {effectName} for {turnsLeft} turn(s).");
@@ -88,6 +90,7 @@ public class StatModifierEffect : MonoBehaviour, ITurnEffect
         player.playerData.damageBonus -= damage;
         player.playerData.movement -= movement;
         player.playerData.defense -= defense;
+        if (actions != 0) player.ModifyActionsPerTurn(-actions);
         if (movement != 0) player.RefreshMovementSpaces();
         Debug.Log($"{player.name}'s {effectName} wears off.");
         Destroy(this);

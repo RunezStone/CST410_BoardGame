@@ -48,5 +48,5 @@ MonoBehaviour:
   cardDescription: The wizard hops away teleports to an empty space up to 8 squares away.
   points: 1
   costsAction: 1
-  range: 8
+  range: 5
   includeDiagonals: 0

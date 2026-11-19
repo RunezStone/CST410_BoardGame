@@ -48,8 +48,8 @@ MonoBehaviour:
   cardDescription: The wizard spits a small ball of fire at an enemy for 1d4 damage within 6 tiles.
   points: 0
   costsAction: 1
-  range: 6
+  range: 7
   includeDiagonals: 0
   flatDamage: 0
-  damageDieSides: 4
+  damageDieSides: 12
   damageDiceCount: 1

@@ -1,0 +1,798 @@
+=== DICE LAB (GDD v4.0 Section 4.7)  seed = 410 ===
+A  Attack d20+bonus vs Defense (nat 20 hits, nat 1 misses)
+     +2 hero vs minion (Def 9):   14 of 20, 70.0%
+     +3 hero vs minion (Def 9):   15 of 20, 75.0%
+     +2 hero vs Villain (Def 12):  11 of 20, 55.0%
+     minion +1 vs Wizard (Def 10):  12 of 20, 60.0%
+     minion +1 vs Fighter (Def 13): 9 of 20, 45.0%
+B  Basic melee 2d4 >= 6 (one-shot a minion): 6 of 16, 37.5%
+C  Heal 2d6 >= 7: 21 of 36, 58.3%
+D  Stunning Strike, stunned if d20+Con < DC 12: minion 11 of 20, 55.0%, Villain 10 of 20, 50.0%
+E  Opening hand: basic + draw 2 of 5; Fighter holds a heal: 7 of 10, 70.0%
+
+2d6 x 200 generator check (seed 410)
+Total    :       2     3     4     5     6     7     8     9    10    11    12
+Expected :     5.6  11.1  16.7  22.2  27.8  33.3  27.8  22.2  16.7  11.1   5.6
+Observed :       2    13    12    22    23    38    27    32    17     8     6
+Chi-square = 10.62 (fail at 18.31) -> PASS
+
+Turn order (phase card): Fighter -> Villain -> Wizard -> Villain -> Monk -> Villain -> Cleric -> Villain
+Phases (phase card): 1 StartOfTurn -> 2 Choice -> 3 Resolution -> 4 Payment -> (back to 2 while a move/action is left) -> 5 EndOfTurn [pass] -> 6 Check
+
+=== PHASE 1: Plains. 2 minions on the board, 2 in reserve. Round marker = 1 ===
+    Fighter HP 30/30  pts 2/2  at [3,1]  hand: Great Sword Attack, Bow Shot, Second Wind
+    Wizard HP 18/18  pts 3/3  at [4,0]  hand: Spitfire Cantrip, Acid Lick, Bubble Beam
+    Monk HP 24/24  pts 1/1  at [5,1]  hand: Unarmed Strike, Stunning Strike, Defensive Stance
+    Cleric HP 24/24  pts 3/3  at [6,0]  hand: Staff Strike, Haste, Mass Heal
+    Villain HP 40/40  pts 3/3  at [4,13]  hand: Eldritch Blast, Force Blast, Short Rest
+    Minion 1 HP 6/6  pts 0/0  at [9,10]
+    Minion 2 HP 6/6  pts 0/0  at [3,10]
+
+########## TURN 1  |  Phase 1 Plains, round 1  |  Fighter ##########
+    Fighter HP 30/30  pts 2/2  at [3,1]
+  [1] StartOfTurn legal actions for Fighter:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Fighter:
+    Move to any of 33 squares: [0,0] [1,0] [2,0] [3,0] [0,1] [1,1] [2,1] [4,1] [6,1] [0,2] [1,2] [2,2] [3,2] [4,2] [5,2] [6,2] [7,2] [0,3] [1,3] [2,3] [3,3] [4,3] [5,3] [6,3] [1,4] [2,4] [3,4] [4,4] [5,4] [2,5] [3,5] [4,5] [3,6]
+    Strike - Great Sword Attack -> Wizard [4,0]
+    Strike - Bow Shot -> Monk [5,1]
+    End turn
+    >> chose: Move to [3,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Fighter:
+    (none - this phase is automatic)
+      Fighter moves [3,1] -> [3,6]
+    -> next phase: Payment
+  [4] Payment     legal actions for Fighter:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Fighter:
+    Strike - Bow Shot -> Minion 2 [3,10]
+    End turn
+    >> chose: Strike - Bow Shot -> Minion 2 [3,10]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Fighter:
+    (none - this phase is automatic)
+      Fighter Bow Shot vs Minion 2: d20 9 + 3 = 12 vs Def 9 -> HIT
+          damage 1d4 [2] = 2
+          Minion 2 takes 2 (4/6 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Fighter:
+    (none - this phase is automatic)
+      Fighter's action token flips to SPENT
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Fighter:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 2  |  Phase 1 Plains, round 1  |  Villain ##########
+    Villain HP 40/40  pts 3/3  at [4,13]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 30 squares: [4,9] [4,10] [5,10] [2,11] [3,11] [4,11] [5,11] [6,11] [1,12] [2,12] [3,12] [4,12] [5,12] [6,12] [7,12] [0,13] [1,13] [2,13] [3,13] [5,13] [6,13] [7,13] [8,13] [1,14] [2,14] [3,14] [4,14] [5,14] [6,14] [7,14]
+    Strike - Eldritch Blast -> Minion 2 [3,10]
+    Summon minion at [3,12] (1 pt)
+    Summon minion at [3,13] (1 pt)
+    Summon minion at [3,14] (1 pt)
+    Summon minion at [4,12] (1 pt)
+    Summon minion at [4,14] (1 pt)
+    Summon minion at [5,12] (1 pt)
+    Summon minion at [5,13] (1 pt)
+    Summon minion at [5,14] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Command Minion 1 + Minion 2
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Minion 1 (commanded) moves [9,10] -> [9,6]
+      Minion 1 has nobody to bite
+      Minion 2 (commanded) moves [3,10] -> [3,7]
+      Minion 2 bites Fighter: d20 18 + 1 = 19 vs Def 13 -> HIT
+          Fighter takes 2 (28/30 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 31 squares: [4,9] [3,10] [4,10] [5,10] [2,11] [3,11] [4,11] [5,11] [6,11] [1,12] [2,12] [3,12] [4,12] [5,12] [6,12] [7,12] [0,13] [1,13] [2,13] [3,13] [5,13] [6,13] [7,13] [8,13] [1,14] [2,14] [3,14] [4,14] [5,14] [6,14] [7,14]
+    End turn
+    >> chose: Move to [4,9]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain moves [4,13] -> [4,9]
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Wizard
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 3  |  Phase 1 Plains, round 1  |  Wizard ##########
+    Wizard HP 18/18  pts 3/3  at [4,0]
+  [1] StartOfTurn legal actions for Wizard:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Wizard:
+    Move to any of 27 squares: [0,0] [1,0] [2,0] [3,0] [5,0] [0,1] [1,1] [2,1] [3,1] [4,1] [6,1] [1,2] [2,2] [3,2] [4,2] [5,2] [6,2] [7,2] [2,3] [3,3] [4,3] [5,3] [6,3] [3,4] [4,4] [5,4] [4,5]
+    Strike - Spitfire Cantrip -> Monk [5,1]
+    Strike - Spitfire Cantrip -> Cleric [6,0]
+    Strike - Acid Lick -> Monk [5,1]
+    Strike - Acid Lick -> Cleric [6,0]
+    Strike - Bubble Beam toward right (1 pt)
+    End turn
+    >> chose: Move to [4,5]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Wizard:
+    (none - this phase is automatic)
+      Wizard moves [4,0] -> [4,5]
+    -> next phase: Payment
+  [4] Payment     legal actions for Wizard:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Wizard:
+    Strike - Spitfire Cantrip -> Fighter [3,6]
+    Strike - Spitfire Cantrip -> Monk [5,1]
+    Strike - Spitfire Cantrip -> Villain [4,9]
+    Strike - Spitfire Cantrip -> Minion 1 [9,6]
+    Strike - Spitfire Cantrip -> Minion 2 [3,7]
+    Strike - Acid Lick -> Fighter [3,6]
+    Strike - Bubble Beam toward up (1 pt)
+    End turn
+    >> chose: Strike - Bubble Beam toward up (1 pt)
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Wizard:
+    (none - this phase is automatic)
+      Wizard Bubble Beam vs Villain: d20 6 + 2 = 8 vs Def 12 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Wizard:
+    (none - this phase is automatic)
+      Wizard pays 1 point(s) (2/3 left)
+      Wizard's action token flips to SPENT
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Wizard:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 4  |  Phase 1 Plains, round 1  |  Villain ##########
+    Villain HP 40/40  pts 3/3  at [4,9]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 37 squares: [4,6] [5,6] [2,7] [4,7] [5,7] [6,7] [1,8] [2,8] [3,8] [4,8] [5,8] [6,8] [7,8] [0,9] [1,9] [2,9] [3,9] [5,9] [6,9] [7,9] [8,9] [1,10] [2,10] [3,10] [4,10] [5,10] [6,10] [7,10] [2,11] [3,11] [4,11] [5,11] [6,11] [3,12] [4,12] [5,12] [4,13]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Summon minion at [3,8] (1 pt)
+    Summon minion at [3,9] (1 pt)
+    Summon minion at [3,10] (1 pt)
+    Summon minion at [4,8] (1 pt)
+    Summon minion at [4,10] (1 pt)
+    Summon minion at [5,8] (1 pt)
+    Summon minion at [5,9] (1 pt)
+    Summon minion at [5,10] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Eldritch Blast -> Wizard [4,5]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Eldritch Blast vs Wizard: d20 10 + 2 = 12 vs Def 10 -> HIT
+          damage 1d12 [3] = 3
+          Wizard takes 3 (15/18 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 37 squares: [4,6] [5,6] [2,7] [4,7] [5,7] [6,7] [1,8] [2,8] [3,8] [4,8] [5,8] [6,8] [7,8] [0,9] [1,9] [2,9] [3,9] [5,9] [6,9] [7,9] [8,9] [1,10] [2,10] [3,10] [4,10] [5,10] [6,10] [7,10] [2,11] [3,11] [4,11] [5,11] [6,11] [3,12] [4,12] [5,12] [4,13]
+    End turn
+    >> chose: Move to [4,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain moves [4,9] -> [4,6]
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Monk
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 5  |  Phase 1 Plains, round 1  |  Monk ##########
+    Monk HP 24/24  pts 1/1  at [5,1]
+  [1] StartOfTurn legal actions for Monk:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Monk:
+    Move to any of 51 squares: [0,0] [1,0] [2,0] [3,0] [4,0] [5,0] [7,0] [8,0] [9,0] [0,1] [1,1] [2,1] [3,1] [4,1] [6,1] [7,1] [8,1] [9,1] [0,2] [1,2] [2,2] [3,2] [4,2] [5,2] [6,2] [7,2] [8,2] [9,2] [1,3] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [8,3] [9,3] [2,4] [3,4] [4,4] [5,4] [6,4] [7,4] [8,4] [3,5] [5,5] [6,5] [7,5] [5,6] [6,6] [5,7]
+    Strike - Unarmed Strike -> Cleric [6,0]
+    Disable - Stunning Strike -> Cleric [6,0] (1 pt)
+    Support - Defensive Stance (1 pt)
+    End turn
+    >> chose: Move to [5,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Monk:
+    (none - this phase is automatic)
+      Monk moves [5,1] -> [5,6]
+    -> next phase: Payment
+  [4] Payment     legal actions for Monk:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Monk:
+    Strike - Unarmed Strike -> Wizard [4,5]
+    Strike - Unarmed Strike -> Villain [4,6]
+    Disable - Stunning Strike -> Wizard [4,5] (1 pt)
+    Disable - Stunning Strike -> Villain [4,6] (1 pt)
+    Support - Defensive Stance (1 pt)
+    End turn
+    >> chose: Strike - Unarmed Strike -> Villain [4,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Monk:
+    (none - this phase is automatic)
+      Monk Unarmed Strike vs Villain: d20 14 + 3 = 17 vs Def 12 -> HIT
+          damage 2d4 [4+3] = 7
+          Villain takes 7 (33/40 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Monk:
+    (none - this phase is automatic)
+      Monk's action token flips to SPENT
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Monk:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 6  |  Phase 1 Plains, round 1  |  Villain ##########
+    Villain HP 33/40  pts 3/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Summon minion at [5,7] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Force Blast -> Fighter [3,6] (1 pt)
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Force Blast vs Fighter: d20 6 + 2 = 8 vs Def 13 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain pays 1 point(s) (2/3 left)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Cleric
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 7  |  Phase 1 Plains, round 1  |  Cleric ##########
+    Cleric HP 24/24  pts 3/3  at [6,0]
+  [1] StartOfTurn legal actions for Cleric:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Cleric:
+    Move to any of 32 squares: [1,0] [2,0] [3,0] [4,0] [5,0] [7,0] [8,0] [9,0] [2,1] [3,1] [4,1] [5,1] [6,1] [7,1] [8,1] [9,1] [3,2] [4,2] [5,2] [6,2] [7,2] [8,2] [9,2] [4,3] [5,3] [6,3] [7,3] [8,3] [5,4] [6,4] [7,4] [6,5]
+    Support - Haste -> Fighter [3,6]
+    Support - Haste -> Wizard [4,5]
+    Support - Haste -> Monk [5,6]
+    Support - Mass Heal (3 pt)
+    End turn
+    >> chose: Move to [5,4]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Cleric:
+    (none - this phase is automatic)
+      Cleric moves [6,0] -> [5,4]
+    -> next phase: Payment
+  [4] Payment     legal actions for Cleric:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Cleric:
+    Strike - Staff Strike -> Wizard [4,5]
+    Support - Haste -> Fighter [3,6]
+    Support - Haste -> Wizard [4,5]
+    Support - Haste -> Monk [5,6]
+    Support - Mass Heal (3 pt)
+    End turn
+    >> chose: Support - Haste -> Monk [5,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Cleric:
+    (none - this phase is automatic)
+          Monk gains Haste (3)
+    -> next phase: Payment
+  [4] Payment     legal actions for Cleric:
+    (none - this phase is automatic)
+      Cleric's action token flips to SPENT
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Cleric:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 8  |  Phase 1 Plains, round 1  |  Villain ##########
+    Villain HP 33/40  pts 2/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Cleric [5,4]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Rest - Short Rest
+    Rest
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Summon minion at [5,7] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Force Blast -> Wizard [4,5] (1 pt)
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Force Blast vs Wizard: d20 2 + 2 = 4 vs Def 10 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain pays 1 point(s) (1/3 left)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      --- Round complete. Round marker -> 2 ---
+      Play passes to the Fighter
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 9  |  Phase 1 Plains, round 2  |  Fighter ##########
+    Fighter HP 28/30  pts 2/2  at [3,6]
+  [1] StartOfTurn legal actions for Fighter:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Fighter:
+    Move to any of 33 squares: [3,1] [2,2] [3,2] [4,2] [1,3] [2,3] [3,3] [4,3] [5,3] [0,4] [1,4] [2,4] [3,4] [4,4] [0,5] [1,5] [2,5] [3,5] [0,6] [1,6] [2,6] [0,7] [1,7] [2,7] [0,8] [1,8] [2,8] [3,8] [4,8] [1,9] [2,9] [3,9] [2,10]
+    Strike - Great Sword Attack -> Wizard [4,5]
+    Strike - Great Sword Attack -> Villain [4,6]
+    Strike - Great Sword Attack -> Minion 2 [3,7]
+    Strike - Bow Shot -> Minion 2 [3,7]
+    Strike - Bow Shot -> Villain [4,6]
+    Support - Second Wind (1 pt)
+    End turn
+    >> chose: Strike - Bow Shot -> Villain [4,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Fighter:
+    (none - this phase is automatic)
+      Fighter Bow Shot vs Villain: d20 17 + 3 = 20 vs Def 12 -> HIT
+          damage 1d4 [4] = 4
+          Villain takes 4 (29/40 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Fighter:
+    (none - this phase is automatic)
+      Fighter's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Fighter:
+    Move to any of 33 squares: [3,1] [2,2] [3,2] [4,2] [1,3] [2,3] [3,3] [4,3] [5,3] [0,4] [1,4] [2,4] [3,4] [4,4] [0,5] [1,5] [2,5] [3,5] [0,6] [1,6] [2,6] [0,7] [1,7] [2,7] [0,8] [1,8] [2,8] [3,8] [4,8] [1,9] [2,9] [3,9] [2,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Fighter:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 10  |  Phase 1 Plains, round 2  |  Villain ##########
+    Villain HP 29/40  pts 1/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Cleric [5,4]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Rest - Short Rest
+    Rest
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Summon minion at [5,7] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Eldritch Blast -> Wizard [4,5]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Eldritch Blast vs Wizard: d20 9 + 2 = 11 vs Def 10 -> HIT
+          damage 1d12 [1] = 1
+          Wizard takes 1 (14/18 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Wizard
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 11  |  Phase 1 Plains, round 2  |  Wizard ##########
+    Wizard HP 14/18  pts 2/3  at [4,5]
+  [1] StartOfTurn legal actions for Wizard:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Wizard:
+    Move to any of 46 squares: [4,0] [3,1] [4,1] [5,1] [2,2] [3,2] [4,2] [5,2] [6,2] [1,3] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [0,4] [1,4] [2,4] [3,4] [4,4] [6,4] [7,4] [8,4] [0,5] [1,5] [2,5] [3,5] [5,5] [6,5] [7,5] [8,5] [9,5] [0,6] [1,6] [2,6] [6,6] [7,6] [8,6] [1,7] [2,7] [5,7] [6,7] [7,7] [2,8] [6,8]
+    Strike - Spitfire Cantrip -> Fighter [3,6]
+    Strike - Spitfire Cantrip -> Monk [5,6]
+    Strike - Spitfire Cantrip -> Cleric [5,4]
+    Strike - Spitfire Cantrip -> Villain [4,6]
+    Strike - Spitfire Cantrip -> Minion 1 [9,6]
+    Strike - Spitfire Cantrip -> Minion 2 [3,7]
+    Strike - Acid Lick -> Fighter [3,6]
+    Strike - Acid Lick -> Monk [5,6]
+    Strike - Acid Lick -> Cleric [5,4]
+    Strike - Acid Lick -> Villain [4,6]
+    Strike - Bubble Beam toward up (1 pt)
+    Rest
+    End turn
+    >> chose: Strike - Spitfire Cantrip -> Minion 2 [3,7]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Wizard:
+    (none - this phase is automatic)
+      Wizard Spitfire Cantrip vs Minion 2: d20 12 + 2 = 14 vs Def 9 -> HIT
+          damage 1d4 [1] = 1
+          Minion 2 takes 1 (3/6 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Wizard:
+    (none - this phase is automatic)
+      Wizard's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Wizard:
+    Move to any of 46 squares: [4,0] [3,1] [4,1] [5,1] [2,2] [3,2] [4,2] [5,2] [6,2] [1,3] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [0,4] [1,4] [2,4] [3,4] [4,4] [6,4] [7,4] [8,4] [0,5] [1,5] [2,5] [3,5] [5,5] [6,5] [7,5] [8,5] [9,5] [0,6] [1,6] [2,6] [6,6] [7,6] [8,6] [1,7] [2,7] [5,7] [6,7] [7,7] [2,8] [6,8]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Wizard:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 12  |  Phase 1 Plains, round 2  |  Villain ##########
+    Villain HP 29/40  pts 1/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Cleric [5,4]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Rest - Short Rest
+    Rest
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Summon minion at [5,7] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Eldritch Blast -> Monk [5,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Eldritch Blast vs Monk: d20 10 + 2 = 12 vs Def 12 -> HIT
+          damage 1d12 [11] = 11
+          Monk takes 11 (13/24 HP)
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Monk
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 13  |  Phase 1 Plains, round 2  |  Monk ##########
+    Monk HP 13/24  pts 1/1  at [5,6]  [Haste 3]
+  [1] StartOfTurn legal actions for Monk:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Monk:
+    Move to any of 94 squares: [5,0] [6,0] [7,0] [4,1] [5,1] [6,1] [7,1] [8,1] [3,2] [4,2] [5,2] [6,2] [7,2] [8,2] [9,2] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [8,3] [9,3] [3,4] [4,4] [6,4] [7,4] [8,4] [9,4] [2,5] [5,5] [6,5] [7,5] [8,5] [9,5] [1,6] [2,6] [6,6] [7,6] [8,6] [0,7] [1,7] [2,7] [4,7] [5,7] [6,7] [7,7] [8,7] [9,7] [0,8] [1,8] [2,8] [3,8] [4,8] [5,8] [6,8] [7,8] [8,8] [9,8] [0,9] [1,9] [2,9] [3,9] [4,9] [5,9] [6,9] [7,9] [8,9] [9,9] [1,10] [2,10] [3,10] [4,10] [5,10] [6,10] [7,10] [8,10] [9,10] [2,11] [3,11] [4,11] [5,11] [6,11] [7,11] [8,11] [3,12] [4,12] [5,12] [6,12] [7,12] [4,13] [5,13] [6,13] [5,14]
+    Strike - Unarmed Strike -> Wizard [4,5]
+    Strike - Unarmed Strike -> Villain [4,6]
+    Disable - Stunning Strike -> Wizard [4,5] (1 pt)
+    Disable - Stunning Strike -> Villain [4,6] (1 pt)
+    Support - Defensive Stance (1 pt)
+    End turn
+    >> chose: Strike - Unarmed Strike -> Villain [4,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Monk:
+    (none - this phase is automatic)
+      Monk Unarmed Strike vs Villain: d20 4 + 3 = 7 vs Def 12 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Monk:
+    (none - this phase is automatic)
+      Monk's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Monk:
+    Move to any of 94 squares: [5,0] [6,0] [7,0] [4,1] [5,1] [6,1] [7,1] [8,1] [3,2] [4,2] [5,2] [6,2] [7,2] [8,2] [9,2] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [8,3] [9,3] [3,4] [4,4] [6,4] [7,4] [8,4] [9,4] [2,5] [5,5] [6,5] [7,5] [8,5] [9,5] [1,6] [2,6] [6,6] [7,6] [8,6] [0,7] [1,7] [2,7] [4,7] [5,7] [6,7] [7,7] [8,7] [9,7] [0,8] [1,8] [2,8] [3,8] [4,8] [5,8] [6,8] [7,8] [8,8] [9,8] [0,9] [1,9] [2,9] [3,9] [4,9] [5,9] [6,9] [7,9] [8,9] [9,9] [1,10] [2,10] [3,10] [4,10] [5,10] [6,10] [7,10] [8,10] [9,10] [2,11] [3,11] [4,11] [5,11] [6,11] [7,11] [8,11] [3,12] [4,12] [5,12] [6,12] [7,12] [4,13] [5,13] [6,13] [5,14]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Monk:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 14  |  Phase 1 Plains, round 2  |  Villain ##########
+    Villain HP 29/40  pts 1/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Cleric [5,4]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Rest - Short Rest
+    Rest
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Summon minion at [5,7] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Strike - Eldritch Blast -> Fighter [3,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Villain Eldritch Blast vs Fighter: d20 9 + 2 = 11 vs Def 13 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 14 squares: [6,6] [4,7] [5,7] [6,7] [7,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      Play passes to the Cleric
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 15  |  Phase 1 Plains, round 2  |  Cleric ##########
+    Cleric HP 24/24  pts 3/3  at [5,4]
+  [1] StartOfTurn legal actions for Cleric:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Cleric:
+    Move to any of 49 squares: [4,0] [5,0] [6,0] [3,1] [4,1] [5,1] [6,1] [7,1] [2,2] [3,2] [4,2] [5,2] [6,2] [7,2] [8,2] [1,3] [2,3] [3,3] [4,3] [5,3] [6,3] [7,3] [8,3] [9,3] [0,4] [1,4] [2,4] [3,4] [4,4] [6,4] [7,4] [8,4] [9,4] [1,5] [2,5] [3,5] [5,5] [6,5] [7,5] [8,5] [9,5] [2,6] [6,6] [7,6] [8,6] [5,7] [6,7] [7,7] [6,8]
+    Strike - Staff Strike -> Wizard [4,5]
+    Support - Haste -> Fighter [3,6]
+    Support - Haste -> Wizard [4,5]
+    Support - Haste -> Monk [5,6]
+    Support - Mass Heal (3 pt)
+    End turn
+    >> chose: Move to [5,7]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Cleric:
+    (none - this phase is automatic)
+      Cleric moves [5,4] -> [5,7]
+    -> next phase: Payment
+  [4] Payment     legal actions for Cleric:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Cleric:
+    Strike - Staff Strike -> Monk [5,6]
+    Strike - Staff Strike -> Villain [4,6]
+    Support - Haste -> Fighter [3,6]
+    Support - Haste -> Wizard [4,5]
+    Support - Haste -> Monk [5,6]
+    Support - Mass Heal (3 pt)
+    End turn
+    >> chose: Strike - Staff Strike -> Villain [4,6]
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Cleric:
+    (none - this phase is automatic)
+      Cleric Staff Strike vs Villain: d20 9 + 2 = 11 vs Def 12 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Cleric:
+    (none - this phase is automatic)
+      Cleric's action token flips to SPENT
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Cleric:
+    (none - this phase is automatic)
+      Play passes to the Villain
+    -> next phase: Check
+  [6] Check       legal actions for the table:
+    (none - this phase is automatic)
+    -> next phase: StartOfTurn
+
+########## TURN 16  |  Phase 1 Plains, round 2  |  Villain ##########
+    Villain HP 29/40  pts 1/3  at [4,6]
+  [1] StartOfTurn legal actions for Villain:
+    (none - this phase is automatic)
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 10 squares: [4,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    Strike - Eldritch Blast -> Fighter [3,6]
+    Strike - Eldritch Blast -> Wizard [4,5]
+    Strike - Eldritch Blast -> Monk [5,6]
+    Strike - Eldritch Blast -> Cleric [5,7]
+    Strike - Eldritch Blast -> Minion 1 [9,6]
+    Strike - Eldritch Blast -> Minion 2 [3,7]
+    Strike - Force Blast -> Monk [5,6] (1 pt)
+    Strike - Force Blast -> Wizard [4,5] (1 pt)
+    Strike - Force Blast -> Fighter [3,6] (1 pt)
+    Rest - Short Rest
+    Rest
+    Summon minion at [3,5] (1 pt)
+    Summon minion at [4,7] (1 pt)
+    Summon minion at [5,5] (1 pt)
+    Command Minion 1
+    Command Minion 1 + Minion 2
+    Command Minion 2
+    End turn
+    >> chose: Command Minion 1 + Minion 2
+    -> next phase: Resolution
+  [3] Resolution  legal actions for Villain:
+    (none - this phase is automatic)
+      Minion 1 (commanded) moves [9,6] -> [6,6]
+      Minion 1 bites Monk: d20 19 + 1 = 20 vs Def 12 -> HIT
+          Monk takes 3 (10/24 HP)
+      Minion 2 bites Fighter: d20 5 + 1 = 6 vs Def 13 -> MISS
+    -> next phase: Payment
+  [4] Payment     legal actions for Villain:
+    (none - this phase is automatic)
+      Villain's action token flips to SPENT
+    -> next phase: Choice
+  [2] Choice      legal actions for Villain:
+    Move to any of 10 squares: [4,7] [2,8] [3,8] [4,8] [5,8] [6,8] [3,9] [4,9] [5,9] [4,10]
+    End turn
+    >> chose: End turn
+    -> next phase: EndOfTurn
+  [5] EndOfTurn   legal actions for Villain:
+    (none - this phase is automatic)
+      --- Round complete. Round marker -> 3 ---
+      Play passes to the Fighter
+    -> next phase: Check
+
+Finished 2 full round(s) = 16 turns, through every phase, seed 410.
+    Fighter HP 28/30  pts 2/2  at [3,6]
+    Wizard HP 14/18  pts 2/3  at [4,5]
+    Monk HP 10/24  pts 1/1  at [5,6]  [Haste 2]
+    Cleric HP 24/24  pts 3/3  at [5,7]
+    Villain HP 29/40  pts 1/3  at [4,6]
+    Minion 1 HP 6/6  pts 0/0  at [6,6]
+    Minion 2 HP 3/6  pts 0/0  at [3,7]
+    Dice rolled: 26. Re-run with seed 410 to get exactly this game again.

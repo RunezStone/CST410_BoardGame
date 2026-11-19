@@ -54,9 +54,12 @@ public abstract class ActionCard : MonoBehaviour
 
     // ---------------- Attacks ----------------
 
-    // d20 + attackBonus vs defense. Nat 20 always hits, nat 1 always misses.
+    // Hit rule (CLAUDE.md §2 Attacks): d20 + attackBonus vs the target's defense.
+    //   total > defense  -> FULL hit: full damage, and on-hit effects (push, stun, arc...) happen.
+    //   otherwise        -> MISS: half damage (rounded down, minimum 1). No on-hit effects.
+    //   natural 20 is always a full hit; natural 1 is always a miss. Total == defense is a miss.
     // Damage = flatDamage + (damageDiceCount d damageDieSides) + attacker's damageBonus (e.g. Rage).
-    // onHit runs after the damage lands (used by Force Blast to push).
+    // onHit runs after the damage lands, for FULL hits only (used by Force Blast to push).
     // Static so the dice callbacks never depend on the card object still existing.
     protected static void ResolveAttack(PlayerManager attacker, PlayerManager target, int flatDamage, int damageDieSides,
                                         int damageDiceCount = 1, System.Action onHit = null)
@@ -66,9 +69,9 @@ public abstract class ActionCard : MonoBehaviour
     }
 
     // Same rules, several targets at once (Bubble Beam, Roundhouse Kick...).
-    // ONE d20 is rolled and compared to each target's own defense, then ONE damage roll
-    // is applied to everyone it hit -- so all the dice are thrown once, not once per target.
-    // onHit(target, damage) runs for each target hit, in list order, after all damage lands.
+    // ONE d20 is rolled and compared to each target's own defense, then ONE damage roll:
+    // full hits take `damage`, misses take HalfDamage(damage). All dice are thrown once, not once per target.
+    // onHit(target, damage) runs for each FULL hit, in list order, after all damage lands.
     protected static void ResolveAreaAttack(PlayerManager attacker, List<PlayerManager> targets, int flatDamage, int damageDieSides,
                                             int damageDiceCount = 1, System.Action<PlayerManager, int> onHit = null)
     {
@@ -76,18 +79,14 @@ public abstract class ActionCard : MonoBehaviour
 
         RollDie(20, d20 =>
         {
-            int bonus = attacker.playerData.attackBonus;
-            int total = d20 + bonus;
-            List<PlayerManager> hits = new List<PlayerManager>();
+            List<PlayerManager> fullHits = new List<PlayerManager>();
+            List<PlayerManager> halfHits = new List<PlayerManager>();
 
             foreach (PlayerManager target in targets)
             {
-                int defense = target.playerData.defense;
-                bool hit = d20 == 20 || (d20 != 1 && total >= defense);
-                Debug.Log($"{attacker.name} attacks {target.name}: {d20} + {bonus} = {total} vs Defense {defense} -> {(hit ? "HIT" : "MISS")}");
-                if (hit) hits.Add(target);
+                if (IsFullHit(attacker, target, d20)) fullHits.Add(target);
+                else halfHits.Add(target);
             }
-            if (hits.Count == 0) return;
 
             int extra = flatDamage + attacker.playerData.damageBonus;
             int diceCount = damageDieSides > 0 ? damageDiceCount : 0;   // RollDice(0, ...) reports 0 instantly
@@ -95,16 +94,96 @@ public abstract class ActionCard : MonoBehaviour
             RollDice(diceCount, damageDieSides, roll =>
             {
                 int damage = roll + extra;
-                foreach (PlayerManager t in hits) ApplyDamage(attacker, t, damage);
-                foreach (PlayerManager t in hits) onHit?.Invoke(t, damage);
+                int half = HalfDamage(damage);
+                foreach (PlayerManager t in fullHits) ApplyDamage(attacker, t, damage);
+                foreach (PlayerManager t in halfHits) ApplyDamage(attacker, t, half, "grazes");
+                foreach (PlayerManager t in fullHits) onHit?.Invoke(t, damage);
             });
         });
     }
 
-    protected static void ApplyDamage(PlayerManager attacker, PlayerManager target, int damage)
+    // Compares an already-rolled d20 against one target and logs the result.
+    // Use this when a card needs its own damage handling (e.g. Absorb) but the standard hit rule.
+    protected static bool IsFullHit(PlayerManager attacker, PlayerManager target, int d20)
+    {
+        int bonus = attacker.playerData.attackBonus;
+        int total = d20 + bonus;
+        int defense = target.playerData.defense;
+
+        bool full;
+        if (d20 == 20) full = true;          // natural 20: always a full hit
+        else if (d20 == 1) full = false;     // natural 1: always a miss
+        else full = total > defense;         // must BEAT defense; equal is a miss
+
+        Debug.Log($"{attacker.name} attacks {target.name}: {d20} + {bonus} = {total} vs Defense {defense} -> " +
+                  $"{(full ? "HIT (full damage)" : "MISS (half damage)")}");
+        return full;
+    }
+
+    // Damage a miss does: half, rounded down, but never 0 ("a miss never does 0").
+    protected static int HalfDamage(int damage)
+    {
+        if (damage <= 0) return 0;
+        return Mathf.Max(1, damage / 2);
+    }
+
+    // ---------------- Saving throws ----------------
+
+    protected enum SaveStat { Brain, Constitution, Athletics }
+
+    protected static int GetSaveStat(PlayerManager target, SaveStat stat)
+    {
+        PlayerData d = target.playerData;
+        return stat switch
+        {
+            SaveStat.Brain => d.brain,
+            SaveStat.Constitution => d.constitution,
+            SaveStat.Athletics => d.athletics,
+            _ => 0
+        };
+    }
+
+    // The target rolls d20 + stat. The save FAILS if the total is below `dc` (Cards.xlsx: "stat < DC").
+    // For an "or lower" rule like Athletics <= 12, pass dc = 13.
+    protected static void RollSave(PlayerManager target, SaveStat stat, int dc, System.Action onFail, System.Action onSuccess = null)
+    {
+        RollDie(20, d20 =>
+        {
+            int mod = GetSaveStat(target, stat);
+            int total = d20 + mod;
+            bool failed = total < dc;
+            Debug.Log($"{target.name} {stat} check: {d20} + {mod} = {total} vs DC {dc} -> {(failed ? "FAILED" : "RESISTED")}");
+            if (failed) onFail?.Invoke();
+            else onSuccess?.Invoke();
+        });
+    }
+
+    protected static void ApplyDamage(PlayerManager attacker, PlayerManager target, int damage, string verb = "hits")
     {
         target.playerData.TakeDamage(damage);
-        Debug.Log($"{attacker.name} hits {target.name} for {damage}! ({target.playerData.hitPoints} HP left)");
+        Debug.Log($"{attacker.name} {verb} {target.name} for {damage}! ({target.playerData.hitPoints} HP left)");
+    }
+
+    // ---------------- Ally targeting ----------------
+
+    // Squares of living allies within range (plus the caster's own square if includeSelf).
+    // Used by support cards (Heal, Haste, Beacon of Hope, Restore...).
+    protected static List<Space> GetAllySpacesInRange(PlayerManager caster, int range, bool includeDiagonals, bool includeSelf)
+    {
+        List<Space> spaces = new List<Space>();
+        foreach (Space s in GetSpacesInRange(caster.currSpace, range, includeDiagonals))
+        {
+            PlayerManager p = FindCharacterOn(s, caster);
+            if (caster.IsAllyOf(p) && !p.playerData.IsDead) spaces.Add(s);
+        }
+        if (includeSelf) spaces.Add(caster.currSpace);
+        return spaces;
+    }
+
+    // The character a support card was aimed at: the caster if they clicked their own square.
+    protected static PlayerManager CharacterOnOrSelf(Space space, PlayerManager caster)
+    {
+        return space == caster.currSpace ? caster : FindCharacterOn(space, caster);
     }
 
     // Single die: same as RollDice with a count of 1.
@@ -239,7 +318,7 @@ public abstract class ActionCard : MonoBehaviour
             return;
         }
 
-        target.Teleport(dest);
+        target.Teleport(dest, forced: true);   // being shoved still works while Frozen
         Debug.Log($"{target.name} is pushed back to [{dest.id[0]}, {dest.id[1]}].");
     }
 

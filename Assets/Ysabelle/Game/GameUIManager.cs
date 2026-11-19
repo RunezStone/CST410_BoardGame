@@ -14,6 +14,7 @@ public class GameUIManager : MonoBehaviour
         else if (name == "Player_Fighter") { playerTurnDisplay.text = "Fighter's Turn"; }
         else if (name == "Player_Wizard") { playerTurnDisplay.text = "Wizard's Turn"; }
         else if (name == "Player_Monk") { playerTurnDisplay.text = "Monk's Turn"; }
+        else { playerTurnDisplay.text = $"{name}'s Turn"; }   // minions ("Minion 1"), Cleric, etc.
     }
 
 }

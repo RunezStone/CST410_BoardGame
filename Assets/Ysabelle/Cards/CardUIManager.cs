@@ -7,8 +7,17 @@ public class CardUIManager : MonoBehaviour
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private CardInventory playerInventory;
 
+    [Tooltip("Tick this on the shared Minion canvas. Cards are then played by whichever minion is taking its turn " +
+             "(MinionManager.ActiveMinion), using the ActionCards on that minion (Bite). Player Manager and " +
+             "Player Inventory can stay empty. Build it with Convergence > Minions > Build Minion Canvas.")]
+    [SerializeField] private bool useActiveMinion = false;
+
     private List<ActionCard> currentCards = new List<ActionCard>();
     private int currentCardIndex = 0;
+
+    // The character the cards are played for: the fixed player, or the minion whose turn it is.
+    private PlayerManager CurrentPlayer =>
+        useActiveMinion ? (MinionManager.instance != null ? MinionManager.instance.ActiveMinion : null) : playerManager;
 
     void Start()
     {
@@ -19,9 +28,38 @@ public class CardUIManager : MonoBehaviour
         }
     }
 
+    // The minion canvas is shown again at the start of every minion's turn: refresh for the new minion.
+    void OnEnable()
+    {
+        if (useActiveMinion) ShowPlayerCards();
+    }
+
+    // Closes the card panel (the "ActionCards" canvas that Use Deck opens).
+    // Never hides the canvas this component sits in, or the player's main canvas.
+    public void HideCardPanel()
+    {
+        foreach (CardDisplay display in cardDisplays)
+        {
+            if (display == null) continue;
+            Canvas panel = display.GetComponentInParent<Canvas>(true);
+            if (panel == null || transform.IsChildOf(panel.transform)) return;
+            if (playerManager != null && playerManager.playerUICanvas == panel) return;
+            panel.gameObject.SetActive(false);
+            return;
+        }
+    }
+
     // Display Cards
     public void ShowPlayerCards()
     {
+        if (useActiveMinion)
+        {
+            PlayerManager minion = CurrentPlayer;
+            currentCardIndex = 0;
+            DisplayCards(minion != null ? new List<ActionCard>(minion.GetComponents<ActionCard>()) : new List<ActionCard>());
+            return;
+        }
+
         DisplayCards(playerInventory.cards);
     }
 
@@ -42,12 +80,18 @@ public class CardUIManager : MonoBehaviour
             }
 
             int cardIndex = currentCardIndex + i;
+
+            // Minions have fewer cards than there are slots: hide the empty ones
+            // (otherwise they'd keep whatever text the canvas was copied with).
+            if (useActiveMinion) cardDisplays[i].gameObject.SetActive(cardIndex < currentCards.Count);
+
             if (cardIndex >= currentCards.Count) continue;
 
             ActionCard card = currentCards[cardIndex];
             if (card == null)
             {
-                Debug.LogError($"{name}: Card {cardIndex} in {playerInventory.name}'s inventory is missing.", playerInventory);
+                string owner = playerInventory != null ? playerInventory.name : "the active minion";
+                Debug.LogError($"{name}: Card {cardIndex} in {owner}'s inventory is missing.", this);
                 continue;
             }
 
@@ -58,12 +102,13 @@ public class CardUIManager : MonoBehaviour
     private void UseCard(int displayIndex)
     {
         int cardIndex = currentCardIndex + displayIndex;
+        if (cardIndex >= currentCards.Count) return;
 
-        if (cardIndex < currentCards.Count)
-        {
-            ActionCard card = currentCards[cardIndex];
-            card.Play(playerManager);
-        }
+        PlayerManager player = CurrentPlayer;
+        ActionCard card = currentCards[cardIndex];
+        if (player == null || card == null) return;
+
+        card.Play(player);
     }
 
     public void NextCards()
